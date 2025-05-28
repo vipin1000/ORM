@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+
+</br>
+<button type="submit" class="btn btn-secondary">submit</button>
+</form> {% endcomment %}
+
+
+
+{% for r in rating %}
+<p>{{r.restaurant.name}}---{{r.rating}}</p>
+
+
+{% endfor %}
+
+{% endblock %}
