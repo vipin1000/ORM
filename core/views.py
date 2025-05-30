@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import RatingForm, RestaurantForm
-from .models import Restaurant,Rating,Sale
+from .models import Restaurant,Rating,Sale,StaffRestaurant
 
 def home(request):
     # if request.method == 'POST':
@@ -10,9 +10,11 @@ def home(request):
     # else:
     #     form = RatingForm()  # Initialize form for GET requests
     # restaurant= Restaurant.objects.all()
-    restaurant= Restaurant.objects.all()
-    context = {'restaurant': restaurant}  # Pass the form to the context
-    return render(request, 'index.html', context)
+    # restaurant= Restaurant.objects.all()
+      # Pass the form to the context
+    rests=StaffRestaurant.objects.prefetch_related('staff','restaurants')
+    context={"rest":rests}
+    return render(request, 'index.html',context=context)
 
 
 

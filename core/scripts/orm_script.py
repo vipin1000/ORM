@@ -2,6 +2,7 @@ from core.models import *
 from django.utils import timezone
 from django.db import connection
 from pprint import pprint
+import random
 from django.contrib.auth.models import User
 def run():
     # restaurant=Restaurant()
@@ -35,9 +36,7 @@ def run():
     # print(rating
     # print(sale)
     
-    # rating= Rating.objects.filter(rating=6).delete(
-        
-        # )
+    # delete= StaffRestaurant.objects.filter(id=8).delete()
     
 
 
@@ -58,12 +57,38 @@ def run():
     # pprint(connection.queries)
 
 
-    staff,created=Staff.objects.get_or_create(name="jhony")
-    # print(staff.restaurant.all())
-    staff.restaurant.add(Restaurant.objects.all()[6])
-    staff.restaurant.set(Restaurant.objects.all()[0:6])
-    # print(staff.restaurant.clear())
-    print(staff.restaurant.count())
+    staff,created=Staff.objects.get_or_create(name="jack")
 
+    staff.restaurants.set(Restaurant.objects.all()[:10],
+                        through_defaults= {'salary':random.randint(20000,50000)})
+    # print(staff)
+    # print(created)
+    
+    # restaurant1=Restaurant.objects.all()[2]
+    # print(restaurant1)
+   
+    # restaurant2=Restaurant.objects.all()[3]
+    # print(restaurant2)
+
+    # StaffRestaurant.objects.create(
+    #     staff=staff,
+    #     restaurant=restaurant1,
+    #     salary=28000)
+    
+
+    # StaffRestaurant.objects.create(
+    #     staff=staff,
+    #     restaurant=restaurant2,
+    #     salary=20000)
+    # # staff.restaurant.add(Restaurant.objects.all()[6])
+    # staff.restaurant.set(Restaurant.objects.all()[0:11:2])
+    # # print(staff.restaurant.clear())
+    # print(staff.restaurant.count())
+
+    # rest=Restaurant.objects.get(pk=24)
+    # print(rest.website)
+    # print(rest.staff_set.all())
+    # print(rest.website)
+   
     
 

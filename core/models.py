@@ -38,13 +38,16 @@ class Restaurant(models.Model):
 
 class Staff(models.Model):
     name=models.CharField(max_length=200)
-    restaurant=models.ManyToManyField(Restaurant)
+    restaurants=models.ManyToManyField(Restaurant, through='StaffRestaurant')
     def __str__(self):
         restaurant_names = ", ".join([restaurant.name for restaurant in self.restaurant.all()])
         return f"{self.name} ------ {restaurant_names}"
 
 
-
+class StaffRestaurant(models.Model):
+    staff=models.ForeignKey(Staff,on_delete=models.CASCADE)
+    restaurants=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
+    salary= models.FloatField(null=True)
 
 
 class Rating(models.Model):
